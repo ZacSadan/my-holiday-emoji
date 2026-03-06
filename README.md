@@ -16,11 +16,15 @@ import Holidays from "https://cdn.jsdelivr.net/npm/date-holidays@3.26.8/+esm";
 import MyHolidayEmoji from "https://cdn.github.com/npm/my-holiday-emoji.re.js";
 import HOLIDAYS_TO_EMOJIES_LIST from "https://cdn.github.com/npm/my-holiday-emoji.js";
 
+// can choose only desired values , no parameter = all
+mhe = new MyHolidayEmoji({"","public","bank","optional","school","observance"});
 
-mhe = new MyHolidayEmoji({"","public","bank","optional","school","observance"}); // can choose only desired values , no parameter = all
-mhe.setDaysAhead(3); // search holidays in the next few days. default value = 0 (only today)
-mhe.setHolidayDaysAhread(/\bchristmas\b/i,14);   // set diffrent days ahead for matching for spcific pre-defined holiday
-mhe.setHolidayDaysAhread(/\bnew year'?s\b/i,14); // set diffrent days ahead for matching for spcific pre-defined holiday
+// search holidays in the next few days. default value = 0 (only today)
+mhe.setDaysAhead(3);
+
+// set diffrent days ahead for matching for spcific pre-defined holiday
+mhe.setHolidayDaysAhread(/\bchristmas\b/i,14);   
+mhe.setHolidayDaysAhread(/\bnew year'?s\b/i,14); 
 
 // draw all matched emojis for next few days.
 // on hover of the specific emoji - you will be able to see the name of the holiday
@@ -34,13 +38,16 @@ mhe.draw("bg");
 // customizations
 mhe.setEmoji(/\bchristmas\b/i,"🎄" );
 
-// only for debugging / test page
-mhe.setCountry("US") ; // can set diffrent country
-mhe.setDate("2025-03-25"); // can set diffrent date 
 
-// test page contains:
+// // only for debugging / test page. test page contains:
 // 4 buttons to set mhe.draw() function
 // date picker + country picker
 // log box for console.log() after each function call
+
+// can set diffrent country
+mhe.setCountry("US") ;
+// can set diffrent date 
+mhe.setDate("2025-03-25"); 
+
 
 ```
