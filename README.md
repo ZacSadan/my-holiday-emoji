@@ -30,13 +30,16 @@ mhe.setHolidayDaysAhread(/\bnew year'?s\b/i,14); // set diffrent days ahead for 
 // hideall : hide all drawing
 mhe.draw("bg"); 
 
+// customizations
+mhe.setEmoji(/\bchristmas\b/i,"🎅" );
+
 // only for debugging / test page
 mhe.setCountry("US") ; // can set diffrent country
 mhe.setDate("2025-03-25"); // can set diffrent date 
 
-// customizations
-mhe.setEmoji(/\bchristmas\b/i,"🎅" );
-
-
+// test page contains:
+// 4 buttons to set mhe.draw() function
+// date picker + country picker
+// log box for console.log() after each function call
 
 ```
