@@ -45,6 +45,8 @@ mhe.setEmoji(/\bchristmas\b/i,"🎄" );
 // date picker + country picker
 // log box for console.log() after each function call
 
+// can access test page at : https://raw.githack.com/ZacSadan/my-holiday-emoji/main/test.html
+
 // can set diffrent country
 mhe.setCountry("US") ;
 // can set diffrent date 
