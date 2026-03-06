@@ -31,7 +31,7 @@ mhe.setHolidayDaysAhread(/\bnew year'?s\b/i,14); // set diffrent days ahead for 
 mhe.draw("bg"); 
 
 // customizations
-mhe.setEmoji(/\bchristmas\b/i,"🎅" );
+mhe.setEmoji(/\bchristmas\b/i,"🎄" );
 
 // only for debugging / test page
 mhe.setCountry("US") ; // can set diffrent country
