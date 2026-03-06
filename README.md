@@ -4,7 +4,7 @@ A GeoIP-free solution for injecting regional holiday emojis into login UI via cl
 How?
 - detect the current user country from the user TimeZone (Javascript)
 - fetch all country holidays
-- find today's ( or next few days ) holidays
+- find today's ( or next few days ) holidays ( in english only )
 - match relevant emojis for these holidays
 - "draw" the relevat emojis on user HTML page ( usually login page )
 
