@@ -5,9 +5,10 @@ How?
 - detect the current user country from the user TimeZone (Javascript)
 - fetch all country holidays
 - find today's ( or next few days ) holidays ( in english only )
-- match relevant emojis for these holidays
+- match relevant emojis for these holidays ( using the my-holiday-emoji.re.js file )
 - "draw" the relevat emojis on user HTML page ( usually login page )
-
+- user engemenmet goes up ! 😊
+  
 **Integration Example:**
 ```
 import ct from "https://cdn.jsdelivr.net/npm/countries-and-timezones@3.8.0/+esm";
@@ -47,7 +48,12 @@ mhe.setEmoji(/\bchristmas\b/i,"🎄" );
 // can set diffrent country
 mhe.setCountry("US") ;
 // can set diffrent date 
-mhe.setDate("2025-03-25"); 
+mhe.setDate("2025-03-25");
+
+// calc current country, unless set by setCountry function
+country = mhe.getCountry();
+// calc current emojis, consider setCountry/setDate if setted
+emojiList = mhe.getEmojis();
 
 
 ```
