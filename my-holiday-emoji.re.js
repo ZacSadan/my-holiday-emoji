@@ -1,32 +1,32 @@
 const EMOJI_RULES = [
   // Universal-ish
   { re: /\bnew year'?s\b/i, emojis: ["🎆", "🥂"] },
-  { re: /\bchristmas\b/i, emojis: ["🎄", "🎁"] },
+  { re: /\bchristmas\b/i, emojis: ["🎅"] },
   { re: /\bgood friday\b/i, emojis: ["✝️"] },
   { re: /\beaster\b/i, emojis: ["🐣"] },
   { re: /\blabor day\b/i, emojis: ["🧰"] },
   { re: /\bworkers'? day\b/i, emojis: ["🧰"] },
   { re: /\bthanksgiving\b/i, emojis: ["🦃"] },
-  { re: /\bvalentine'?s\b/i, emojis: ["❤️", "💘"] },
+  { re: /\bvalentine'?s\b/i, emojis: ["💘"] },
   { re: /\bmother'?s day\b/i, emojis: ["💐"] },
   { re: /\bfather'?s day\b/i, emojis: ["👔"] },
-  { re: /\bvictory day\b/i, emojis: ["🕊️", "🎖️"] },
+  { re: /\bvictory day\b/i, emojis: ["🎖️"] },
   { re: /\bwomen'?s day\b/i, emojis: ["🌷"] },  
 
   // US
-  { re: /\bmartin luther king\b/i, emojis: ["✊🏾", "🕊️"] },
+  { re: /\bmartin luther king\b/i, emojis: [ "🕊️"] },
   { re: /\bpresidents'? day\b/i, emojis: ["🏛️"] },
-  { re: /\bmemorial day\b/i, emojis: ["🪖", "🕯️"] },
-  { re: /\bjuneteenth\b/i, emojis: ["✊🏿", "🎉"] },
+  { re: /\bmemorial day\b/i, emojis: ["🕯️"] },
+  { re: /\bjuneteenth\b/i, emojis: ["✊🏿"] },
   { re: /\bveterans day\b/i, emojis: ["🪖"] },
 
   // Canada
   { re: /\bcanada day\b/i, emojis: ["🍁"] },
   { re: /\bvictoria day\b/i, emojis: ["👑"] },
-  { re: /\bremembrance day\b/i, emojis: ["🕯️", "🌺"] },
+  { re: /\bremembrance day\b/i, emojis: ["🕯️"] },
 
   // UK (GB)
-  { re: /\bboxing day\b/i, emojis: ["🎁", "🥊"] },
+  { re: /\bboxing day\b/i, emojis: [ "🥊"] },
   { re: /\bbank holiday\b/i, emojis: ["🏦"] },
 
   // Germany
@@ -41,14 +41,14 @@ const EMOJI_RULES = [
   // India
   { re: /\brepublic day\b/i, emojis: ["🏛️"] },
   { re: /\bgandhi jayanti\b/i, emojis: ["🕊️"] },
-  { re: /\bdiwali\b/i, emojis: ["🪔", "✨"] },
+  { re: /\bdiwali\b/i, emojis: ["✨"] },
   { re: /\bholi\b/i, emojis: ["🎨"] },
 
   // Israel / Jewish holidays (names often appear as transliterations)
-  { re: /\brosh hashanah\b/i, emojis: ["🍎", "🍯"] },
+  { re: /\brosh hashanah\b/i, emojis: ["🍎"] },
   { re: /\byom kippur\b/i, emojis: ["🕯️"] },
   { re: /\bsukkot\b/i, emojis: ["🌿"] },
-  { re: /\bsimchat torah\b/i, emojis: ["📜", "🎉"] },
+  { re: /\bsimchat torah\b/i, emojis: ["📜"] },
   { re: /\bhanukkah\b/i, emojis: ["🕎"] },
   { re: /\bpurim\b/i, emojis: ["🎭"] },
   { re: /\bpassover\b/i, emojis: ["🍷"] },
