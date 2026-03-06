@@ -8,8 +8,7 @@ How?
 - match relevant emojis for these holidays
 - "draw" the relevat emojis on user HTML page ( usually login page )
 
-Integration Example:
-
+**Integration Example:**
 ```
 import ct from "https://cdn.jsdelivr.net/npm/countries-and-timezones@3.8.0/+esm";
 import Holidays from "https://cdn.jsdelivr.net/npm/date-holidays@3.26.8/+esm";
