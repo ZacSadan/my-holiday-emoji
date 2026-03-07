@@ -1,61 +1,214 @@
-# my-holiday-emoji
-A GeoIP-free solution for injecting regional holiday emojis into login UI via client-side locale detection.
+# 🎉 my-holiday-emoji
 
-How?
-- detect the current user country from the user TimeZone (Javascript)
-- fetch all country holidays for the current user detected country 
-- find today's ( or next few days ) holidays ( in english only )
-- match relevant emojis for these holidays ( using the my-holiday-emoji.re.js file )
-- "draw" the relevat emojis on user HTML page ( usually login page )
-- user engagement and happiness goes up ! 😊
-  
-**Integration Example:**
-```
-import ct from "https://cdn.jsdelivr.net/npm/countries-and-timezones@3.8.0/+esm";
-import Holidays from "https://cdn.jsdelivr.net/npm/date-holidays@3.26.8/+esm";
+> **A GeoIP-free solution for injecting regional holiday emojis into your login UI — powered entirely by client-side locale detection.**
 
-import MyHolidayEmoji from "https://cdn.github.com/npm/my-holiday-emoji.re.js";
-import HOLIDAYS_TO_EMOJIES_LIST from "https://cdn.github.com/npm/my-holiday-emoji.js";
+No servers. No IP lookups. Just the browser's timezone → country → holidays → emojis. User happiness goes up. 😊
 
-// can choose only desired values , no parameter = all
-mhe = new MyHolidayEmoji({"","public","bank","optional","school","observance"});
+---
 
-// search holidays in the next few days. default value = 0 (only today)
-mhe.setDaysAhead(3);
-
-// set diffrent days ahead for matching for spcific pre-defined holiday
-mhe.setHolidayDaysAhread(/\bchristmas\b/i,14);   
-mhe.setHolidayDaysAhread(/\bnew year'?s\b/i,14); 
-
-// draw all matched emojis for next few days.
-// on hover of the specific emoji - you will be able to see the name of the holiday
-// possible values :
-// bg : draw as low opacity all over the html background
-// pacman : draw as random 1-2 moving emojis all over html
-// snow: draw the emojies as falking snow from the top of the page
-// hideall : hide all drawing
-mhe.draw("bg"); 
-
-// customizations
-mhe.setEmoji(/\bchristmas\b/i,"🎄" );
-
-
-// // only for debugging / test page. test page contains:
-// 4 buttons to set mhe.draw() function
-// date picker + country picker
-// log box for console.log() after each function call
-
-// can access test page at : https://raw.githack.com/ZacSadan/my-holiday-emoji/main/test.html
-
-// can set diffrent country
-mhe.setCountry("US") ;
-// can set diffrent date 
-mhe.setDate("2025-03-25");
-
-// calc current country, unless set by setCountry function
-country = mhe.getCountry();
-// calc current emojis, consider setCountry/setDate if setted
-emojiList = mhe.getEmojis();
-
+## How it works
 
 ```
+browser timezone  →  country code  →  public holidays  →  matched emojis  →  draw on page
+```
+
+1. Detects the user's **country** from `Intl.DateTimeFormat` timezone (no GeoIP needed)
+2. Fetches all **national holidays** for that country via [`date-holidays`](https://github.com/commenthol/date-holidays)
+3. Finds holidays **today** (or in the next N days)
+4. Matches relevant **emojis** using regex rules in `my-holiday-emoji.re.js`
+5. **Draws** the emojis on the page — as background, falling snow, or drifting animation
+
+---
+
+## Live Demo
+
+[**Open test page →**](https://raw.githack.com/ZacSadan/my-holiday-emoji/main/test.html)
+
+---
+
+## Quick Start
+
+```html
+<script type="module">
+  import MyHolidayEmoji from "https://raw.githack.com/ZacSadan/my-holiday-emoji/main/my-holiday-emoji.js";
+
+  const mhe = new MyHolidayEmoji();
+  mhe.draw("snow");
+</script>
+```
+
+That's it. The library auto-detects the country and today's date.
+
+---
+
+## API Reference
+
+### `new MyHolidayEmoji(types?)`
+
+Creates a new instance. Optionally filter which holiday types to consider.
+
+```js
+// All holiday types (default)
+const mhe = new MyHolidayEmoji();
+
+// Only specific types
+const mhe = new MyHolidayEmoji(["public", "bank", "optional", "school", "observance"]);
+```
+
+---
+
+### `.draw(mode)`
+
+Renders emojis on the page. Calling `draw()` again with a different mode replaces the previous one.
+
+| Mode | Effect |
+|---|---|
+| `"bg"` | Scattered emojis behind the page at low opacity |
+| `"snow"` | Emojis fall from the top of the page |
+| `"pacman"` | 1–2 emojis drift horizontally across the screen |
+| `"hideall"` | Removes all drawn emojis |
+
+> Hover over any emoji to see the holiday name as a tooltip.
+
+```js
+mhe.draw("bg");
+mhe.draw("snow");
+mhe.draw("pacman");
+mhe.draw("hideall");
+```
+
+---
+
+### `.getEmojis()`
+
+Returns the matched holidays and their emojis for the current country/date window.
+
+```js
+const results = mhe.getEmojis();
+// [{ name: "Christmas Day", date: "2025-12-25", emojis: ["🎅"] }, ...]
+```
+
+---
+
+### `.getCountry()`
+
+Returns the detected (or overridden) country code.
+
+```js
+const country = mhe.getCountry(); // e.g. "US", "DE", "IL"
+```
+
+---
+
+### `.setDaysAhead(n)`
+
+Look ahead N days from today when searching for holidays. Default is `0` (today only).
+
+```js
+mhe.setDaysAhead(3); // match holidays in the next 3 days
+```
+
+---
+
+### `.setHolidayDaysAhread(regex, n)`
+
+Override the lookahead window for a specific holiday matched by regex.
+
+```js
+mhe.setHolidayDaysAhread(/\bchristmas\b/i, 14);  // show 🎅 starting 14 days before Christmas
+mhe.setHolidayDaysAhread(/\bnew year'?s\b/i, 14);
+```
+
+---
+
+### `.setEmoji(regex, emoji)`
+
+Override the emoji for any holiday matched by regex.
+
+```js
+mhe.setEmoji(/\bchristmas\b/i, "🎄"); // replace default 🎅 with 🎄
+```
+
+---
+
+### `.setCountry(code)`
+
+Override the auto-detected country.
+
+```js
+mhe.setCountry("DE"); // Germany
+```
+
+---
+
+### `.setDate(dateStr)`
+
+Override today's date (useful for testing).
+
+```js
+mhe.setDate("2025-12-25");
+```
+
+---
+
+## Full Example
+
+```js
+import MyHolidayEmoji from "https://raw.githack.com/ZacSadan/my-holiday-emoji/main/my-holiday-emoji.js";
+
+const mhe = new MyHolidayEmoji(["public", "bank"]);
+
+// Start showing Christmas decorations 2 weeks early
+mhe.setHolidayDaysAhread(/\bchristmas\b/i, 14);
+mhe.setHolidayDaysAhread(/\bnew year'?s\b/i, 14);
+
+// Custom emoji override
+mhe.setEmoji(/\bchristmas\b/i, "🎄");
+
+// Draw as falling snow
+mhe.draw("snow");
+```
+
+---
+
+## Holiday Coverage
+
+Emojis are matched by regex rules in [`my-holiday-emoji.re.js`](my-holiday-emoji.re.js). Currently covers:
+
+| Region | Holidays |
+|---|---|
+| Universal | New Year's, Christmas, Easter, Valentine's Day, Mother's/Father's Day, Labour Day, Thanksgiving |
+| 🇺🇸 United States | MLK Day, Presidents' Day, Memorial Day, Juneteenth, Veterans Day |
+| 🇨🇦 Canada | Canada Day, Victoria Day, Remembrance Day |
+| 🇬🇧 United Kingdom | Boxing Day, Bank Holidays |
+| 🇩🇪 Germany | German Unity Day, Reformation Day |
+| 🇺🇦 Ukraine | Constitution Day, Defender's Day |
+| 🇮🇳 India | Republic Day, Gandhi Jayanti, Diwali, Holi |
+| 🇮🇱 Israel | Rosh Hashanah, Yom Kippur, Hanukkah, Passover, Purim, and more |
+
+Adding new rules is as simple as adding a line to `my-holiday-emoji.re.js`.
+
+---
+
+## Files
+
+| File | Purpose |
+|---|---|
+| [`my-holiday-emoji.js`](my-holiday-emoji.js) | Main library — `MyHolidayEmoji` class |
+| [`my-holiday-emoji.re.js`](my-holiday-emoji.re.js) | Holiday → emoji regex rules |
+| [`test.html`](test.html) | Interactive debug/test page |
+
+---
+
+## Dependencies
+
+Loaded automatically via CDN — no install needed.
+
+- [`date-holidays`](https://github.com/commenthol/date-holidays) — holiday data for 200+ countries
+- [`countries-and-timezones`](https://github.com/manuelmhtr/countries-and-timezones) — timezone → country mapping
+
+---
+
+## License
+
+[MIT](LICENSE)

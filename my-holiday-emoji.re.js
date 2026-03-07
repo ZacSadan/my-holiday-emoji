@@ -57,3 +57,5 @@ const EMOJI_RULES = [
   { re: /\btu bi(sh)?vat\b/i, emojis: ["🌳"] },
   { re: /\byom hash?oah\b/i, emojis: ["🕯️"] },
 ];
+
+export default EMOJI_RULES;

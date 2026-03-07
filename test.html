@@ -1,1 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>my-holiday-emoji — Test Page</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f5f5f5;
+      min-height: 100vh;
+    }
+    h1 { margin-top: 0; font-size: 1.4rem; }
+    .controls {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: flex-end;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 10000;
+    }
+    .field { display: flex; flex-direction: column; gap: 4px; }
+    label { font-size: 0.75rem; color: #555; font-weight: 600; }
+    select, input[type="date"] {
+      padding: 6px 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+    .draw-buttons { display: flex; gap: 8px; flex-wrap: wrap; align-items: flex-end; }
+    button {
+      padding: 7px 14px;
+      border: 1px solid #aaa;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      background: #fff;
+    }
+    button:hover { background: #e8e8e8; }
+    button.active { background: #333; color: #fff; border-color: #333; }
+    #btn-apply { background: #2563eb; color: #fff; border-color: #2563eb; }
+    #btn-apply:hover { background: #1d4ed8; }
+    .log-section { position: relative; z-index: 10000; }
+    .log-section h2 { font-size: 1rem; margin-bottom: 6px; }
+    #log {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      line-height: 1.5;
+      min-height: 120px;
+      max-height: 300px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    #emoji-result {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      min-height: 48px;
+      font-size: 1.1rem;
+      position: relative;
+      z-index: 10000;
+    }
+    #emoji-result .empty { color: #999; font-size: 0.9rem; font-style: italic; }
+    .holiday-item { margin-bottom: 6px; }
+    .holiday-name { font-size: 0.8rem; color: #555; margin-left: 6px; }
+  </style>
+</head>
+<body>
+  <h1>my-holiday-emoji — Test Page</h1>
 
+  <div class="controls">
+    <div class="field">
+      <label for="country-picker">Country</label>
+      <select id="country-picker">
+        <option value="">auto-detect</option>
+        <option value="US">US — United States</option>
+        <option value="GB">GB — United Kingdom</option>
+        <option value="CA">CA — Canada</option>
+        <option value="DE">DE — Germany</option>
+        <option value="FR">FR — France</option>
+        <option value="AU">AU — Australia</option>
+        <option value="IN">IN — India</option>
+        <option value="IL">IL — Israel</option>
+        <option value="UA">UA — Ukraine</option>
+        <option value="JP">JP — Japan</option>
+        <option value="BR">BR — Brazil</option>
+        <option value="MX">MX — Mexico</option>
+        <option value="ZA">ZA — South Africa</option>
+        <option value="NG">NG — Nigeria</option>
+        <option value="NZ">NZ — New Zealand</option>
+        <option value="SG">SG — Singapore</option>
+        <option value="IT">IT — Italy</option>
+        <option value="ES">ES — Spain</option>
+        <option value="NL">NL — Netherlands</option>
+        <option value="PL">PL — Poland</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="date-picker">Date</label>
+      <input type="date" id="date-picker">
+    </div>
+
+    <div class="field">
+      <label for="days-ahead">Days ahead</label>
+      <input type="number" id="days-ahead" value="0" min="0" max="60"
+        style="width:70px;padding:6px 8px;border:1px solid #ccc;border-radius:4px;font-size:0.9rem;">
+    </div>
+
+    <button id="btn-apply">Apply</button>
+
+    <div class="draw-buttons">
+      <label style="align-self:center;font-size:0.75rem;color:#555;font-weight:600;">Draw mode:</label>
+      <button id="btn-bg" data-mode="bg">bg</button>
+      <button id="btn-pacman" data-mode="pacman">pacman</button>
+      <button id="btn-snow" data-mode="snow">snow</button>
+      <button id="btn-hideall" data-mode="hideall">hide all</button>
+    </div>
+  </div>
+
+  <div id="emoji-result">
+    <span class="empty">No results yet...</span>
+  </div>
+
+  <div class="log-section">
+    <h2>Console log</h2>
+    <pre id="log"></pre>
+  </div>
+
+  <script type="module">
+    import MyHolidayEmoji from "./my-holiday-emoji.js";
+
+    // ── Patch console.log to also write to the log box ──────────────────────
+    const logBox = document.getElementById("log");
+    const _origLog = console.log.bind(console);
+    console.log = (...args) => {
+      _origLog(...args);
+      const line = args.map(a =>
+        typeof a === "object" ? JSON.stringify(a, null, 2) : String(a)
+      ).join(" ");
+      logBox.textContent += line + "\n";
+      logBox.scrollTop = logBox.scrollHeight;
+    };
+
+    // ── State ────────────────────────────────────────────────────────────────
+    let mhe = new MyHolidayEmoji();
+    let currentMode = "bg";
+
+    // ── DOM refs ─────────────────────────────────────────────────────────────
+    const countryPicker = document.getElementById("country-picker");
+    const datePicker    = document.getElementById("date-picker");
+    const daysAheadEl   = document.getElementById("days-ahead");
+    const resultBox     = document.getElementById("emoji-result");
+    const drawBtns      = document.querySelectorAll("[data-mode]");
+
+    // ── Helpers ──────────────────────────────────────────────────────────────
+    function todayStr() {
+      return new Date().toISOString().slice(0, 10);
+    }
+
+    function setActiveBtn(mode) {
+      drawBtns.forEach(b => b.classList.toggle("active", b.dataset.mode === mode));
+    }
+
+    function renderResult(emojis) {
+      if (!emojis.length) {
+        resultBox.innerHTML = '<span class="empty">No holidays matched for this date/country/window.</span>';
+        return;
+      }
+      resultBox.innerHTML = emojis.map(h =>
+        `<div class="holiday-item">
+          ${h.emojis.join(" ")}
+          <span class="holiday-name">${h.name} (${h.date ? h.date.slice(0,10) : ""})</span>
+        </div>`
+      ).join("");
+    }
+
+    function applyAndDraw() {
+      const country  = countryPicker.value;
+      const date     = datePicker.value;
+      const daysAhd  = parseInt(daysAheadEl.value, 10) || 0;
+
+      mhe = new MyHolidayEmoji();
+      mhe.setDaysAhead(daysAhd);
+      if (country) mhe.setCountry(country);
+      if (date)    mhe.setDate(date);
+
+      console.log(`[test] country=${mhe.getCountry()} date=${date || todayStr()} daysAhead=${daysAhd}`);
+
+      const emojis = mhe.getEmojis();
+      renderResult(emojis);
+
+      if (currentMode !== "hideall") mhe.draw(currentMode);
+    }
+
+    // ── Event listeners ──────────────────────────────────────────────────────
+    document.getElementById("btn-apply").addEventListener("click", applyAndDraw);
+
+    drawBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        currentMode = btn.dataset.mode;
+        setActiveBtn(currentMode);
+        mhe.draw(currentMode);
+        console.log(`[test] draw("${currentMode}")`);
+      });
+    });
+
+    // ── Init ─────────────────────────────────────────────────────────────────
+    datePicker.value = todayStr();
+    setActiveBtn(currentMode);
+
+    // Auto-detect country and pre-select in picker
+    const detectedCountry = mhe.getCountry();
+    console.log(`[test] Auto-detected country: ${detectedCountry}`);
+    if (countryPicker.querySelector(`option[value="${detectedCountry}"]`)) {
+      countryPicker.value = detectedCountry;
+    }
+
+    applyAndDraw();
+  </script>
+</body>
+</html>
