@@ -1,4 +1,7 @@
 const EMOJI_RULES = [
+  
+  //https://github.com/commenthol/date-holidays/tree/master/data/countries
+
   // Universal-ish
   { re: /\bnew year'?s\b/i, emojis: ["🥂"] },
   { re: /\bchristmas\b/i, emojis: ["🎅"] },
