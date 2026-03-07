@@ -158,9 +158,10 @@ export default class MyHolidayEmoji {
     this._clearLayer();
     if (mode === "hideall") return;
 
+    if (!this._lastEmojis.length) this.getEmojis();
     const allEmojis = this._lastEmojis.flatMap(h => h.emojis.map(e => ({ emoji: e, name: h.name })));
     if (!allEmojis.length) {
-      console.log("[MyHolidayEmoji] draw(): no emojis to draw");
+      this._logState('draw(): no emojis matched');
       return;
     }
 

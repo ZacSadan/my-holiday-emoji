@@ -1,6 +1,6 @@
 const EMOJI_RULES = [
   // Universal-ish
-  { re: /\bnew year'?s\b/i, emojis: ["🎆", "🥂"] },
+  { re: /\bnew year'?s\b/i, emojis: ["🥂"] },
   { re: /\bchristmas\b/i, emojis: ["🎅"] },
   { re: /\bgood friday\b/i, emojis: ["✝️"] },
   { re: /\beaster\b/i, emojis: ["🐣"] },
