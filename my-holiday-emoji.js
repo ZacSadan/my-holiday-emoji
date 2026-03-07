@@ -55,7 +55,7 @@ export default class MyHolidayEmoji {
     // Normalize to midnight local time
     baseDate.setHours(0, 0, 0, 0);
 
-    const hd = new Holidays(country);
+    const hd = new Holidays(country, { languages: ["en"] });
     const year = baseDate.getFullYear();
 
     // Collect holidays for this year and next (handles year-boundary lookahead)
