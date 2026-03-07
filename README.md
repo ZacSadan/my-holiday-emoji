@@ -28,7 +28,11 @@ browser timezone  →  country code  →  public holidays  →  matched emojis  
 
 ## Snow Example
 
+Detect current country + current holiday and 
+present the relevant emojie as "snow".
+
 <img src="images/HolidayEmoji.gif" height="300">
+
 ---
 
 ## Quick Start
