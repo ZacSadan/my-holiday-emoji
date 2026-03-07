@@ -26,6 +26,11 @@ browser timezone  →  country code  →  public holidays  →  matched emojis  
 
 ---
 
+## Snow Example
+
+<img src="images/HolidayEmoji.gif" height="300">
+---
+
 ## Quick Start
 
 ```html
