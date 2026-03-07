@@ -91,6 +91,7 @@ export default class MyHolidayEmoji {
       if (hDate >= baseDate && hDate <= windowEnd) {
         const name = holiday.name || "";
         const emojis = this._resolveEmojis(name);
+        console.log(`  ✓ in window: "${name}" → emojis: [${emojis.join(", ") || "none matched"}]`);
         if (emojis.length) {
           results.push({ name, date: holiday.date || holiday.start, emojis });
         }
@@ -129,8 +130,7 @@ export default class MyHolidayEmoji {
     this._clearLayer();
     if (mode === "hideall") return;
 
-    const emojiList = this._lastEmojis.length ? this._lastEmojis : this.getEmojis();
-    const allEmojis = emojiList.flatMap(h => h.emojis.map(e => ({ emoji: e, name: h.name })));
+    const allEmojis = this._lastEmojis.flatMap(h => h.emojis.map(e => ({ emoji: e, name: h.name })));
     if (!allEmojis.length) {
       console.log("[MyHolidayEmoji] draw(): no emojis to draw");
       return;
@@ -170,7 +170,7 @@ export default class MyHolidayEmoji {
         position:absolute;
         left:${Math.random() * 100}%;
         top:${Math.random() * 100}%;
-        font-size:${2 + Math.random() * 2}rem;
+        font-size:${1 + Math.random() * 1}rem;
         opacity:0.15;
         pointer-events:none;
         user-select:none;
@@ -191,7 +191,7 @@ export default class MyHolidayEmoji {
         position:absolute;
         left:${Math.random() * 100}%;
         top:-5%;
-        font-size:${1.5 + Math.random() * 1.5}rem;
+        font-size:${0.9 + Math.random() * 0.8}rem;
         opacity:${0.6 + Math.random() * 0.4};
         pointer-events:none;
         user-select:none;
@@ -213,7 +213,7 @@ export default class MyHolidayEmoji {
       span.style.cssText = `
         position:absolute;
         top:${top}%;
-        font-size:2.5rem;
+        font-size:1.4rem;
         pointer-events:none;
         user-select:none;
         animation:mhe-drift ${duration.toFixed(1)}s linear infinite ${reverse};

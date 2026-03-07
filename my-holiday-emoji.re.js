@@ -47,15 +47,25 @@ const EMOJI_RULES = [
   // Israel / Jewish holidays (names often appear as transliterations)
   { re: /\brosh hashanah\b/i, emojis: ["🍎"] },
   { re: /\byom kippur\b/i, emojis: ["🕯️"] },
-  { re: /\bsukkot\b/i, emojis: ["🌿"] },
-  { re: /\bsimchat torah\b/i, emojis: ["📜"] },
+    { re: /\bsukkot\b/i, emojis: ["🌿"] },
+    { re: /\bsimchat torah\b/i, emojis: ["📜"] },
+  { re: /shmini atzeret/i, emojis: ["📜"] },
   { re: /\bhanukkah\b/i, emojis: ["🕎"] },
   { re: /\bpurim\b/i, emojis: ["🎭"] },
   { re: /\bpassover\b/i, emojis: ["🍷"] },
   { re: /\bpesach\b/i, emojis: ["🍷"] },
   { re: /\bshavuot\b/i, emojis: ["🌾"] },
   { re: /\btu bi(sh)?vat\b/i, emojis: ["🌳"] },
-  { re: /\byom hash?oah\b/i, emojis: ["🕯️"] },
+  { re: /yom hash?oah/i, emojis: ["🕯️"] },
+  { re: /holocaust remembrance/i, emojis: ["🕯️"] },
+  { re: /yom ha('?a)?tzmaut/i, emojis: ["🎆"] },
+  { re: /independence day.*israel|israel.*independence/i, emojis: ["🎆"] },
+  { re: /yom hazikaron/i, emojis: ["🕯️"] },
+  { re: /fallen soldiers/i, emojis: ["🕯️"] },
+  { re: /yom yerushalayim/i, emojis: ["🕌"] },
+  { re: /jerusalem day/i, emojis: ["🕌"] },
+  { re: /lag b['']?aomer/i, emojis: ["🔥"] },
+  
 ];
 
 export default EMOJI_RULES;
