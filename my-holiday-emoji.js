@@ -170,7 +170,7 @@ export default class MyHolidayEmoji {
         position:absolute;
         left:${Math.random() * 100}%;
         top:${Math.random() * 100}%;
-        font-size:${1 + Math.random() * 1}rem;
+        font-size:${0.5 + Math.random() * 0.5}rem;
         opacity:0.15;
         pointer-events:none;
         user-select:none;
@@ -191,7 +191,7 @@ export default class MyHolidayEmoji {
         position:absolute;
         left:${Math.random() * 100}%;
         top:-5%;
-        font-size:${0.9 + Math.random() * 0.8}rem;
+        font-size:${0.45 + Math.random() * 0.4}rem;
         opacity:${0.6 + Math.random() * 0.4};
         pointer-events:none;
         user-select:none;
@@ -213,7 +213,7 @@ export default class MyHolidayEmoji {
       span.style.cssText = `
         position:absolute;
         top:${top}%;
-        font-size:1.4rem;
+        font-size:0.7rem;
         pointer-events:none;
         user-select:none;
         animation:mhe-drift ${duration.toFixed(1)}s linear infinite ${reverse};

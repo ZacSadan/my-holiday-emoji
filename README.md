@@ -170,6 +170,18 @@ mhe.draw("snow");
 ```
 
 ---
+## Example for Chrome/Console injection
+
+```js
+
+const { default: MyHolidayEmoji } = await import("https://raw.githack.com/ZacSadan/my-holiday-emoji/main/my-holiday-emoji.js");
+const mhe = new MyHolidayEmoji();
+mhe.setDaysAhead(30); 
+mhe.draw("snow");
+
+```
+
+---
 
 ## Holiday Coverage
 
