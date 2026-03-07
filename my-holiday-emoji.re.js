@@ -19,6 +19,7 @@ const EMOJI_RULES = [
   { re: /\bmemorial day\b/i, emojis: ["🕯️"] },
   { re: /\bjuneteenth\b/i, emojis: ["✊🏿"] },
   { re: /\bveterans day\b/i, emojis: ["🪖"] },
+  //🗽
 
   // Canada
   { re: /\bcanada day\b/i, emojis: ["🍁"] },
@@ -58,8 +59,8 @@ const EMOJI_RULES = [
   { re: /\btu bi(sh)?vat\b/i, emojis: ["🌳"] },
   { re: /yom hash?oah/i, emojis: ["🕯️"] },
   { re: /holocaust remembrance/i, emojis: ["🕯️"] },
-  { re: /yom ha('?a)?tzmaut/i, emojis: ["🎆"] },
-  { re: /independence day.*israel|israel.*independence/i, emojis: ["🎆"] },
+  { re: /yom ha('?a)?tzmaut/i, emojis: ["✨"] },
+  { re: /independence day.*israel|israel.*independence/i, emojis: ["✨"] },
   { re: /yom hazikaron/i, emojis: ["🕯️"] },
   { re: /fallen soldiers/i, emojis: ["🕯️"] },
   { re: /yom yerushalayim/i, emojis: ["🕌"] },

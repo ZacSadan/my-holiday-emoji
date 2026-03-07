@@ -16,37 +16,65 @@ export default class MyHolidayEmoji {
     this._drawMode = null;
   }
 
+  _logState(caller) {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    let autoCountry = "US";
+    try {
+      const c = ct.getCountriesForTimezone(tz);
+      if (c && c.length) autoCountry = c[0].id;
+    } catch (e) {}
+    console.log(`[MyHolidayEmoji] ${caller} | state:`, {
+      country:              this._countryOverride ?? `auto (${autoCountry})`,
+      date:                 this._dateOverride ?? `auto (${new Date().toISOString().slice(0,10)})`,
+      timezone:             tz,
+      daysAhead:            this._daysAhead,
+      types:                this._types ? [...this._types] : "all",
+      perHolidayDaysAhead:  this._perHolidayDaysAhead.map(o => ({ re: String(o.re), n: o.n })),
+      emojiOverrides:       this._emojiOverrides.map(o => ({ re: String(o.re), emoji: o.emoji })),
+      lastEmojisCount:      this._lastEmojis.length,
+      drawMode:             this._drawMode,
+    });
+  }
+
   setDaysAhead(n) {
     this._daysAhead = n;
+    this._logState("setDaysAhead");
   }
 
   setHolidayDaysAhread(re, n) {
     this._perHolidayDaysAhead.push({ re, n });
+    this._logState("setHolidayDaysAhread");
   }
 
   setEmoji(re, emoji) {
     this._emojiOverrides.push({ re, emoji });
+    this._logState("setEmoji");
   }
 
   setCountry(code) {
     this._countryOverride = code || null;
+    this._logState("setCountry");
   }
 
   setDate(dateStr) {
     // accepts "YYYY-MM-DD" or null to reset
     this._dateOverride = dateStr || null;
+    this._logState("setDate");
   }
 
   getCountry() {
-    if (this._countryOverride) return this._countryOverride;
-    try {
-      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      const countries = ct.getCountriesForTimezone(tz);
-      if (countries && countries.length) return countries[0].id;
-    } catch (e) {
-      // fall through
+    let result = "US";
+    if (this._countryOverride) {
+      result = this._countryOverride;
+    } else {
+      try {
+        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const countries = ct.getCountriesForTimezone(tz);
+        if (countries && countries.length) result = countries[0].id;
+      } catch (e) {}
     }
-    return "US"; // safe default
+    this._logState(`getCountry → ${result}`);
+    return result;
   }
 
   getEmojis() {
@@ -99,7 +127,7 @@ export default class MyHolidayEmoji {
     }
 
     this._lastEmojis = results;
-    console.log("[MyHolidayEmoji] getEmojis() →", JSON.stringify(results));
+    this._logState(`getEmojis → ${results.length} matched`);
     return results;
   }
 
@@ -145,7 +173,7 @@ export default class MyHolidayEmoji {
     else if (mode === "snow") this._drawSnow(layer, allEmojis);
     else if (mode === "pacman") this._drawPacman(layer, allEmojis);
 
-    console.log(`[MyHolidayEmoji] draw("${mode}") → ${allEmojis.length} emoji(s)`);
+    this._logState(`draw("${mode}") → ${allEmojis.length} emoji(s)`);
   }
 
   _clearLayer() {
