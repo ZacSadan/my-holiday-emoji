@@ -186,11 +186,13 @@ export default class MyHolidayEmoji {
     const span = document.createElement("span");
     span.textContent = emoji;
     span.title = name;
+    span.style.pointerEvents = "auto";
+    span.style.cursor = "default";
     return span;
   }
 
   _drawBg(layer, allEmojis) {
-    layer.style.cssText = "position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;";
+    layer.style.cssText = "position:fixed;inset:0;z-index:2147483647;pointer-events:none;overflow:hidden;";
     const count = Math.max(20, allEmojis.length * 6);
     for (let i = 0; i < count; i++) {
       const item = allEmojis[i % allEmojis.length];
@@ -201,7 +203,8 @@ export default class MyHolidayEmoji {
         top:${Math.random() * 100}%;
         font-size:${0.5 + Math.random() * 0.5}rem;
         opacity:0.15;
-        pointer-events:none;
+        pointer-events:auto;
+        cursor:default;
         user-select:none;
       `;
       layer.appendChild(span);
@@ -209,7 +212,7 @@ export default class MyHolidayEmoji {
   }
 
   _drawSnow(layer, allEmojis) {
-    layer.style.cssText = "position:fixed;inset:0;z-index:9999;pointer-events:none;overflow:hidden;";
+    layer.style.cssText = "position:fixed;inset:0;z-index:2147483647;pointer-events:none;overflow:hidden;";
     const count = Math.max(15, allEmojis.length * 4);
     for (let i = 0; i < count; i++) {
       const item = allEmojis[i % allEmojis.length];
@@ -222,16 +225,22 @@ export default class MyHolidayEmoji {
         top:-5%;
         font-size:${0.45 + Math.random() * 0.4}rem;
         opacity:${0.6 + Math.random() * 0.4};
-        pointer-events:none;
+        pointer-events:auto;
+        cursor:pointer;
         user-select:none;
         animation:mhe-fall ${duration.toFixed(1)}s ${delay.toFixed(1)}s linear infinite;
       `;
+      span.addEventListener("click", () => {
+        const all = layer.querySelectorAll("span");
+        const paused = span.style.animationPlayState === "paused";
+        all.forEach(s => s.style.animationPlayState = paused ? "running" : "paused");
+      });
       layer.appendChild(span);
     }
   }
 
   _drawPacman(layer, allEmojis) {
-    layer.style.cssText = "position:fixed;inset:0;z-index:9999;pointer-events:none;overflow:hidden;";
+    layer.style.cssText = "position:fixed;inset:0;z-index:2147483647;pointer-events:none;overflow:hidden;";
     const count = Math.min(2, allEmojis.length);
     for (let i = 0; i < count; i++) {
       const item = allEmojis[i % allEmojis.length];
@@ -243,7 +252,8 @@ export default class MyHolidayEmoji {
         position:absolute;
         top:${top}%;
         font-size:0.7rem;
-        pointer-events:none;
+        pointer-events:auto;
+        cursor:default;
         user-select:none;
         animation:mhe-drift ${duration.toFixed(1)}s linear infinite ${reverse};
       `;
