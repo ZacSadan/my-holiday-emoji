@@ -118,7 +118,7 @@ export default class MyHolidayEmoji {
 
       if (hDate >= baseDate && hDate <= windowEnd) {
         const name = holiday.name || "";
-        const emojis = this._resolveEmojis(name);
+        const emojis = this._resolveEmojis(name, country);
         console.log(`  ✓ in window: "${name}" → emojis: [${emojis.join(", ") || "none matched"}]`);
         if (emojis.length) {
           results.push({ name, date: holiday.date || holiday.start, emojis });
@@ -131,25 +131,28 @@ export default class MyHolidayEmoji {
     return results;
   }
 
-  _resolveEmojis(name) {
+  _resolveEmojis(name, country) {
     const matched = [];
-    for (const rule of EMOJI_RULES) {
-      if (rule.re.test(name)) {
-        // Check for override
-        let overrideEmoji = null;
-        for (const ov of this._emojiOverrides) {
-          if (ov.re.test(name)) {
-            overrideEmoji = ov.emoji;
-            break;
+
+    // Try country-specific rules first, then fall back to universal (no country field)
+    const countryRules   = EMOJI_RULES.filter(r => r.country === country);
+    const universalRules = EMOJI_RULES.filter(r => !r.country);
+    const rulesToTry = countryRules.length ? [countryRules, universalRules] : [universalRules];
+
+    for (const ruleSet of rulesToTry) {
+      for (const rule of ruleSet) {
+        if (rule.re.test(name)) {
+          let overrideEmoji = null;
+          for (const ov of this._emojiOverrides) {
+            if (ov.re.test(name)) { overrideEmoji = ov.emoji; break; }
           }
-        }
-        if (overrideEmoji) {
-          matched.push(overrideEmoji);
-        } else {
-          matched.push(...rule.emojis);
+          if (overrideEmoji) matched.push(overrideEmoji);
+          else matched.push(...rule.emojis);
         }
       }
+      if (matched.length) break; // found in country rules — skip universal
     }
+
     return matched;
   }
 
@@ -201,7 +204,7 @@ export default class MyHolidayEmoji {
         position:absolute;
         left:${Math.random() * 100}%;
         top:${Math.random() * 100}%;
-        font-size:${0.5 + Math.random() * 0.5}rem;
+        font-size:${1 + Math.random() * 1}rem;
         opacity:0.15;
         pointer-events:auto;
         cursor:default;
@@ -223,7 +226,7 @@ export default class MyHolidayEmoji {
         position:absolute;
         left:${Math.random() * 100}%;
         top:-5%;
-        font-size:${0.45 + Math.random() * 0.4}rem;
+        font-size:${0.9 + Math.random() * 0.8}rem;
         opacity:${0.6 + Math.random() * 0.4};
         pointer-events:auto;
         cursor:pointer;
@@ -251,7 +254,7 @@ export default class MyHolidayEmoji {
       span.style.cssText = `
         position:absolute;
         top:${top}%;
-        font-size:0.7rem;
+        font-size:1.4rem;
         pointer-events:auto;
         cursor:default;
         user-select:none;

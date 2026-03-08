@@ -1,6 +1,6 @@
 const EMOJI_RULES = [
   
-  //https://github.com/commenthol/date-holidays/tree/master/data/countries
+  // https://github.com/commenthol/date-holidays/tree/master/data/countries
 
   // Universal-ish
   { re: /\bnew year'?s\b/i, emojis: ["🥂"] },
@@ -17,58 +17,63 @@ const EMOJI_RULES = [
   { re: /\bwomen'?s day\b/i, emojis: ["🌷"] },  
 
   // US
-  { re: /\bmartin luther king\b/i, emojis: [ "🕊️"] },
-  { re: /\bpresidents'? day\b/i, emojis: ["🏛️"] },
-  { re: /\bmemorial day\b/i, emojis: ["🕯️"] },
-  { re: /\bjuneteenth\b/i, emojis: ["✊🏿"] },
-  { re: /\bveterans day\b/i, emojis: ["🪖"] },
-  //🗽
+  { country: "US" , re: /\bmartin luther king\b/i, emojis: [ "🕊️"] },
+  { country: "US" , re: /\bpresidents'? day\b/i, emojis: ["🏛️"] },
+  { country: "US" ,  re: /\bmemorial day\b/i, emojis: ["🕯️"] },
+  { country: "US" , re: /\bjuneteenth\b/i, emojis: ["✊🏿"] },
+  { country: "US" , re: /\bveterans day\b/i, emojis: ["🪖"] },
+  { country: "US" , re: /independence day/i, emojis: ["🗽"] },
+  
 
   // Canada
-  { re: /\bcanada day\b/i, emojis: ["🍁"] },
-  { re: /\bvictoria day\b/i, emojis: ["👑"] },
-  { re: /\bremembrance day\b/i, emojis: ["🕯️"] },
+  { country: "CA" , re: /\bcanada day\b/i, emojis: ["🍁"] },
+  { country: "CA" , re: /\bvictoria day\b/i, emojis: ["👑"] },
+  { country: "CA" , re: /\bremembrance day\b/i, emojis: ["🌹"] },
 
   // UK (GB)
-  { re: /\bboxing day\b/i, emojis: [ "🥊"] },
-  { re: /\bbank holiday\b/i, emojis: ["🏦"] },
+  { country: "GB" , re: /\bboxing day\b/i, emojis: [ "🥊"] },
+  { country: "GB" , re: /\bbank holiday\b/i, emojis: ["🏦"] },
+  { country: "GB" , re: /independence day/i, emojis: ["🏰"] },
 
   // Germany
-  { re: /\bgerman unity day\b/i, emojis: ["🤝"] },
-  { re: /\bday of german unity\b/i, emojis: ["🤝"] },
-  { re: /\breformation day\b/i, emojis: ["⛪"] },
+  { country: "DE" , re: /\bgerman unity day\b/i, emojis: ["🤝"] },
+  { country: "DE" , re: /\bday of german unity\b/i, emojis: ["🤝"] },
+  { country: "DE" , re: /\breformation day\b/i, emojis: ["⛪"] },
+  { country: "DE" , re: /independence day/i, emojis: ["🎊"] },
 
   // Ukraine
-  { re: /\bconstitution day\b/i, emojis: ["📜"] },
-  { re: /\bdefender(s)? of ukraine\b/i, emojis: ["🛡️"] },
+  { country: "UA" , re: /\bconstitution day\b/i, emojis: ["📜"] },
+  { country: "UA" , re: /\bdefender(s)? of ukraine\b/i, emojis: ["🛡️"] },
+  { country: "DE" , re: /independence day/i, emojis: ["🔱"] },
 
   // India
-  { re: /\brepublic day\b/i, emojis: ["🏛️"] },
-  { re: /\bgandhi jayanti\b/i, emojis: ["🕊️"] },
-  { re: /\bdiwali\b/i, emojis: ["✨"] },
-  { re: /\bholi\b/i, emojis: ["🎨"] },
+  { country: "IN" , re: /\brepublic day\b/i, emojis: ["🏛️"] },
+  { country: "IN" , re: /\bgandhi jayanti\b/i, emojis: ["🕊️"] },
+  { country: "IN" , re: /\bdiwali\b/i, emojis: ["✨"] },
+  { country: "IN" , re: /\bholi\b/i, emojis: ["🎨"] },
+  { country: "IN" , re: /independence day/i, emojis: ["✨"] },
 
   // Israel / Jewish holidays (names often appear as transliterations)
-  { re: /\brosh hashanah\b/i, emojis: ["🍎"] },
-  { re: /\byom kippur\b/i, emojis: ["🕯️"] },
-    { re: /\bsukkot\b/i, emojis: ["🌿"] },
-    { re: /\bsimchat torah\b/i, emojis: ["📜"] },
-  { re: /shmini atzeret/i, emojis: ["📜"] },
-  { re: /\bhanukkah\b/i, emojis: ["🕎"] },
-  { re: /\bpurim\b/i, emojis: ["🎭"] },
-  { re: /\bpassover\b/i, emojis: ["🍷"] },
-  { re: /\bpesach\b/i, emojis: ["🍷"] },
-  { re: /\bshavuot\b/i, emojis: ["🌾"] },
-  { re: /\btu bi(sh)?vat\b/i, emojis: ["🌳"] },
-  { re: /yom hash?oah/i, emojis: ["🕯️"] },
-  { re: /holocaust remembrance/i, emojis: ["🕯️"] },
-  { re: /yom ha('?a)?tzmaut/i, emojis: ["✨"] },
-  { re: /independence day.*israel|israel.*independence/i, emojis: ["✨"] },
-  { re: /yom hazikaron/i, emojis: ["🕯️"] },
-  { re: /fallen soldiers/i, emojis: ["🕯️"] },
-  { re: /yom yerushalayim/i, emojis: ["🕌"] },
-  { re: /jerusalem day/i, emojis: ["🕌"] },
-  { re: /lag b['']?aomer/i, emojis: ["🔥"] },
+  { country: "IL" , re: /\brosh hashanah\b/i, emojis: ["🍎"] },
+  { country: "IL" , re: /\byom kippur\b/i, emojis: ["🕯️"] },
+  { country: "IL" , re: /\bsukkot\b/i, emojis: ["🌿"] },
+  { country: "IL" , re: /\bsimchat torah\b/i, emojis: ["📜"] },
+  //{ country: "IL" , re: /shmini atzeret/i, emojis: ["📜"] },
+  { country: "IL" , re: /\bhanukkah\b/i, emojis: ["🕎"] },
+  { country: "IL" , re: /\bpurim\b/i, emojis: ["🎭"] },
+  { country: "IL" , re: /\bpassover\b/i, emojis: ["🍷"] },
+  //{ country: "IL" , re: /\bpesach\b/i, emojis: ["🍷"] },
+  { country: "IL" , re: /\bshavuot\b/i, emojis: ["🌾"] },
+  { country: "IL" , re: /\btu bi(sh)?vat\b/i, emojis: ["🌳"] },
+  //{ country: "IL" , re: /yom hash?oah/i, emojis: ["🕯️"] },
+  { country: "IL" , re: /holocaust remembrance/i, emojis: ["🕯️"] },
+  //{ country: "IL" , re: /yom ha('?a)?tzmaut/i, emojis: ["✨"] },
+  { country: "IL" , re: /independence day/i, emojis: ["✨"] },
+  { country: "IL" , re: /yom hazikaron/i, emojis: ["🕯️"] },
+  //{ country: "IL" , re: /fallen soldiers/i, emojis: ["🕯️"] },
+  //{ country: "IL" , re: /yom yerushalayim/i, emojis: ["🕌"] },
+  { country: "IL" , re: /jerusalem day/i, emojis: ["🕌"] },
+  { country: "IL" , re: /lag b['']?aomer/i, emojis: ["🔥"] },
   
 ];
 
