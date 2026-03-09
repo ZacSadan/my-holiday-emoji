@@ -1,5 +1,6 @@
 const EMOJI_RULES = [
   
+  // list of holidays per country :
   // https://github.com/commenthol/date-holidays/tree/master/data/countries
 
   // Universal-ish
