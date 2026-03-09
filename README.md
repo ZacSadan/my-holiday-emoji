@@ -30,7 +30,8 @@ browser timezone  →  country code  →  public holidays  →  matched emojis  
 Detect current country + current holiday and 
 present the relevant emojie as "snow".
 
-<img src="images/HolidayEmoji.gif" height="300">
+<img src="images/HolidayEmoji.gif" height="500">
+<img src="images/bg.jpg" height="500">
 
 ---
 
@@ -184,8 +185,11 @@ mhe.draw("snow");
 
 const { default: MyHolidayEmoji } = await import("https://raw.githack.com/ZacSadan/my-holiday-emoji/main/my-holiday-emoji.js");
 const mhe = new MyHolidayEmoji();
-mhe.setDaysAhead(30); 
+mhe.setDaysAhead(14); 
+mhe.setCountry("US");
+mhe.setDate("2025-12-20");
 mhe.draw("snow");
+
 
 ```
 
