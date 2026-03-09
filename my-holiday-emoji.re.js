@@ -44,7 +44,7 @@ const EMOJI_RULES = [
   // Ukraine
   { country: "UA" , re: /\bconstitution day\b/i, emojis: ["📜"] },
   { country: "UA" , re: /\bdefender(s)? of ukraine\b/i, emojis: ["🛡️"] },
-  { country: "DE" , re: /independence day/i, emojis: ["🔱"] },
+  { country: "UA" , re: /independence day/i, emojis: ["🔱"] },
 
   // India
   { country: "IN" , re: /\brepublic day\b/i, emojis: ["🏛️"] },
@@ -58,20 +58,14 @@ const EMOJI_RULES = [
   { country: "IL" , re: /\byom kippur\b/i, emojis: ["🕯️"] },
   { country: "IL" , re: /\bsukkot\b/i, emojis: ["🌿"] },
   { country: "IL" , re: /\bsimchat torah\b/i, emojis: ["📜"] },
-  //{ country: "IL" , re: /shmini atzeret/i, emojis: ["📜"] },
   { country: "IL" , re: /\bhanukkah\b/i, emojis: ["🕎"] },
   { country: "IL" , re: /\bpurim\b/i, emojis: ["🎭"] },
   { country: "IL" , re: /\bpassover\b/i, emojis: ["🍷"] },
-  //{ country: "IL" , re: /\bpesach\b/i, emojis: ["🍷"] },
   { country: "IL" , re: /\bshavuot\b/i, emojis: ["🌾"] },
   { country: "IL" , re: /\btu bi(sh)?vat\b/i, emojis: ["🌳"] },
-  //{ country: "IL" , re: /yom hash?oah/i, emojis: ["🕯️"] },
   { country: "IL" , re: /holocaust remembrance/i, emojis: ["🕯️"] },
-  //{ country: "IL" , re: /yom ha('?a)?tzmaut/i, emojis: ["✨"] },
   { country: "IL" , re: /independence day/i, emojis: ["✨"] },
   { country: "IL" , re: /yom hazikaron/i, emojis: ["🕯️"] },
-  //{ country: "IL" , re: /fallen soldiers/i, emojis: ["🕯️"] },
-  //{ country: "IL" , re: /yom yerushalayim/i, emojis: ["🕌"] },
   { country: "IL" , re: /jerusalem day/i, emojis: ["🕌"] },
   { country: "IL" , re: /lag b['']?aomer/i, emojis: ["🔥"] },
   
