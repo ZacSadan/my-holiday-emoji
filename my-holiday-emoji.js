@@ -205,7 +205,7 @@ export default class MyHolidayEmoji {
         left:${Math.random() * 100}%;
         top:${Math.random() * 100}%;
         font-size:${1 + Math.random() * 1}rem;
-        opacity:0.15;
+        opacity:0.3;
         pointer-events:auto;
         cursor:default;
         user-select:none;
@@ -244,21 +244,23 @@ export default class MyHolidayEmoji {
 
   _drawPacman(layer, allEmojis) {
     layer.style.cssText = "position:fixed;inset:0;z-index:2147483647;pointer-events:none;overflow:hidden;";
-    const count = Math.min(2, allEmojis.length);
-    for (let i = 0; i < count; i++) {
-      const item = allEmojis[i % allEmojis.length];
+    for (let i = 0; i < allEmojis.length; i++) {
+      const item = allEmojis[i];
       const span = this._makeSpan(item.emoji, item.name);
-      const duration = 6 + Math.random() * 6;
-      const top = 10 + Math.random() * 80;
-      const reverse = i % 2 === 1 ? "reverse" : "normal";
+      const duration = 5 + Math.random() * 8;
+      const top = 5 + Math.random() * 90;
+      const fontSize = 1 + Math.random() * 1.5;
+      const reverse = Math.random() < 0.5 ? "reverse" : "normal";
+      const delay = -(Math.random() * duration);
       span.style.cssText = `
         position:absolute;
         top:${top}%;
-        font-size:1.4rem;
+        font-size:${fontSize.toFixed(2)}rem;
         pointer-events:auto;
         cursor:default;
         user-select:none;
         animation:mhe-drift ${duration.toFixed(1)}s linear infinite ${reverse};
+        animation-delay:${delay.toFixed(1)}s;
       `;
       layer.appendChild(span);
     }

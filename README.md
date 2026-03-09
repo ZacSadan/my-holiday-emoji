@@ -1,8 +1,7 @@
-# 🎉 my-holiday-emoji
+# 🎉 my-holiday-emoji : Celebrate with your users: Automatically inject holiday-themed emojis based on the user's local calendar.
 
-> **A GeoIP-free solution for injecting regional holiday emojis into your login UI — powered entirely by client-side locale detection.**
 
-No servers. No IP lookups. Just the browser's timezone → country → holidays → emojis. User happiness goes up. 😊
+> **A GeoIP-free solution for injecting regional holiday emojis into your login UI — powered entirely by client-side locale detection. Privacy- aware : No servers. No IP lookups. Just the browser's timezone → country → holidays → emojis. User happiness goes up. 😊**
 
 ---
 
