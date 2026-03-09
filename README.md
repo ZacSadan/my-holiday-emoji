@@ -52,7 +52,29 @@ browser timezone  →  country code  →  public holidays  →  matched emojis  
 </script>
 ```
 
-That's it. The library auto-detects the country and today's date.
+That's it. The library auto-detects the country and today's date and holiday.
+
+---
+
+## Full Example
+
+```js
+import MyHolidayEmoji from "https://raw.githack.com/ZacSadan/my-holiday-emoji/main/my-holiday-emoji.js";
+
+const mhe = new MyHolidayEmoji(["public", "bank"]);
+
+mhe.setDaysAhead(7); 
+
+// Start showing Christmas decorations 2 weeks early
+mhe.setHolidayDaysAhread(/\bchristmas\b/i, 14);
+mhe.setHolidayDaysAhread(/\bnew year'?s\b/i, 14);
+
+// Custom emoji override
+mhe.setEmoji(/\bchristmas\b/i, "🎄");
+
+// Draw as falling snow
+mhe.draw("snow");
+```
 
 ---
 
@@ -166,25 +188,6 @@ mhe.setDate("2025-12-25");
 
 ---
 
-## Full Example
-
-```js
-import MyHolidayEmoji from "https://raw.githack.com/ZacSadan/my-holiday-emoji/main/my-holiday-emoji.js";
-
-const mhe = new MyHolidayEmoji(["public", "bank"]);
-
-// Start showing Christmas decorations 2 weeks early
-mhe.setHolidayDaysAhread(/\bchristmas\b/i, 14);
-mhe.setHolidayDaysAhread(/\bnew year'?s\b/i, 14);
-
-// Custom emoji override
-mhe.setEmoji(/\bchristmas\b/i, "🎄");
-
-// Draw as falling snow
-mhe.draw("snow");
-```
-
----
 ## Example for Chrome/Console injection
 
 ```js
