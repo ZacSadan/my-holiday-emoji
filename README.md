@@ -3,6 +3,7 @@
 > **A GeoIP-free solution for injecting regional holiday emojis into your login UI — powered entirely by client-side locale detection. Privacy-aware : No servers. No IP lookups. Just the browser's timezone → country → holidays → emojis. User happiness goes up. 😊**
 
 
+
 For years, we’ve celebrated the holiday season by adding subtle **snow emojis** to our interface in the **weeks leading up to the New Year**. 
 
 The response was incredible—users felt more **connected to the platform and engagement spiked**.
