@@ -25,12 +25,12 @@ browser timezone  →  country code  →  public holidays  →  matched emojis  
 
 ---
 
-## Snow Example
-
-Detect current country + current holiday and 
-present the relevant emojie as "snow".
+## draw("snow") Example
 
 <img src="images/HolidayEmoji.gif" height="500">
+
+## draw("bg") Example
+
 <img src="images/bg.jpg" height="500">
 
 ---
